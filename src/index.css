@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (Tailwind v4 default is media-query based) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Brand */
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d4fe;
+  --color-brand-300: #a3b6fc;
+  --color-brand-400: #7a8ff8;
+  --color-brand-500: #3457f5;
+  --color-brand-600: #2540e0;
+  --color-brand-700: #1d31b8;
+  --color-brand-800: #1c2c8f;
+  --color-brand-900: #1b2a70;
+
+  /* Signal green (verified / live / success) */
+  --color-signal-50: #ecfdf5;
+  --color-signal-100: #d1fae8;
+  --color-signal-400: #34d399;
+  --color-signal-500: #16a673;
+  --color-signal-600: #0f8a5f;
+
+  /* Fonts */
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --shadow-soft: 0 1px 2px 0 rgb(15 18 32 / 0.04), 0 8px 24px -8px rgb(15 18 32 / 0.08);
+  --shadow-lift: 0 12px 32px -12px rgb(15 18 32 / 0.22);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-[#11131a] dark:bg-[#0a0e16] dark:text-[#e7e9f0] font-sans antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background-color: var(--color-brand-200);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
