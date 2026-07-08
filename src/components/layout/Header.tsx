@@ -55,10 +55,10 @@ export default function Header() {
 
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
-          <Button as="a" href="#login" variant="ghost" size="sm">
+          <Button as="a" href="/auth?mode=signin" variant="ghost" size="sm">
             Log in
           </Button>
-          <Button as="a" href="#signup" variant="primary" size="sm">
+          <Button as="a" href="/auth?mode=signup" variant="primary" size="sm">
             Get a number
           </Button>
         </div>

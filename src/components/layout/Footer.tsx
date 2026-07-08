@@ -5,6 +5,13 @@ import { footerColumns } from "../../data/footerColumns";
 
 const socialIcons = [SiX, SiTelegram, SiGithub];
 
+// Define the links that should be disabled and show "Coming soon"
+const comingSoonLinks = [
+  "Affiliate program",
+  "API documentation",
+  "Become a supplier",
+];
+
 export default function Footer() {
   return (
     <footer className="border-t border-[#11131a]/8 bg-[#f5f6fa] dark:border-white/8 dark:bg-[#0d111a]">
@@ -45,16 +52,27 @@ export default function Footer() {
                   {col.title}
                 </h3>
                 <ul className="mt-4 space-y-2.5">
-                  {col.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="text-sm text-[#5c6275] transition-colors hover:text-brand-600 dark:text-[#9aa1b2] dark:hover:text-brand-400"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
+                  {col.links.map((link) => {
+                    // Check if the current link is in the coming soon list
+                    const isComingSoon = comingSoonLinks.includes(link.label);
+                    
+                    return (
+                      <li key={link.label}>
+                        <a
+                          href={isComingSoon ? undefined : link.href}
+                          onClick={isComingSoon ? (e) => e.preventDefault() : undefined}
+                          title={isComingSoon ? "Coming soon" : undefined}
+                          className={`text-sm transition-colors ${
+                            isComingSoon
+                              ? "cursor-not-allowed text-[#5c6275] hover:text-[#5c6275] dark:text-[#9aa1b2] dark:hover:text-[#9aa1b2]"
+                              : "text-[#5c6275] hover:text-brand-600 dark:text-[#9aa1b2] dark:hover:text-brand-400"
+                          }`}
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
